@@ -34,6 +34,9 @@ const float BorderCollisionDamping = 0.4f;
     
     NSTimeInterval _lastUpdateTime;
     NSTimeInterval _deltaTime;
+    
+    float _playerAngle;
+    float _lastAngle;
 }
 
 -(id)initWithSize:(CGSize)size {
@@ -167,12 +170,48 @@ const float BorderCollisionDamping = 0.4f;
     //float angle = atan2f(_playerSpeedY, _playerSpeedX);
     //_playerSprite.zRotation = angle - SK_DEGREES_TO_RADIANS(90);
     
+    /*
     float speed = sqrtf(_playerSpeedX*_playerSpeedX + _playerSpeedY*_playerSpeedY);
     if (speed > 40.0f)
     {
         float angle = atan2f(_playerSpeedY, _playerSpeedX);
         _playerSprite.zRotation = angle - SK_DEGREES_TO_RADIANS(90.0f);
+    }*/
+    
+    /*
+    float speed = sqrtf(_playerSpeedX*_playerSpeedX + _playerSpeedY*_playerSpeedY);
+    if (speed > 40.0f)
+    {
+        float angle = atan2f(_playerSpeedY, _playerSpeedX);
+        
+        const float RotationBlendFactor = 0.2f;
+        _playerAngle = angle * RotationBlendFactor + _playerAngle * (1.0f - RotationBlendFactor);
     }
+    
+    _playerSprite.zRotation = _playerAngle - SK_DEGREES_TO_RADIANS(90.0f);
+     */
+    
+    float speed = sqrtf(_playerSpeedX*_playerSpeedX + _playerSpeedY*_playerSpeedY);
+    if (speed > 40.0f)
+    {
+        float angle = atan2f(_playerSpeedY, _playerSpeedX);
+        
+        // Did the angle flip from +Pi to -Pi, or -Pi to +Pi?
+        if (_lastAngle < -3.0f && angle > 3.0f)
+        {
+            _playerAngle += M_PI * 2.0f;
+        }
+        else if (_lastAngle > 3.0f && angle < -3.0f)
+        {
+            _playerAngle -= M_PI * 2.0f;
+        }
+        
+        _lastAngle = angle;
+        const float RotationBlendFactor = 0.2f;
+        _playerAngle = angle * RotationBlendFactor + _playerAngle * (1.0f - RotationBlendFactor);
+    }
+    
+    _playerSprite.zRotation = _playerAngle - SK_DEGREES_TO_RADIANS(90.0f);
 }
 
 
