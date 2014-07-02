@@ -24,6 +24,21 @@
 		EAD835411964B3670049C135 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD8351C1964B3670049C135 /* UIKit.framework */; };
 		EAD835491964B3680049C135 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EAD835471964B3680049C135 /* InfoPlist.strings */; };
 		EAD8354B1964B3680049C135 /* TrigBlasterSKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD8354A1964B3680049C135 /* TrigBlasterSKTests.m */; };
+		EAD835661964B3C50049C135 /* Asteroid-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = EAD835561964B3C50049C135 /* Asteroid-hd.png */; };
+		EAD835671964B3C50049C135 /* Asteroid.png in Resources */ = {isa = PBXBuildFile; fileRef = EAD835571964B3C50049C135 /* Asteroid.png */; };
+		EAD835681964B3C50049C135 /* Cannon-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = EAD835581964B3C50049C135 /* Cannon-hd.png */; };
+		EAD835691964B3C50049C135 /* Cannon.png in Resources */ = {isa = PBXBuildFile; fileRef = EAD835591964B3C50049C135 /* Cannon.png */; };
+		EAD8356A1964B3C50049C135 /* CannonMissile-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = EAD8355A1964B3C50049C135 /* CannonMissile-hd.png */; };
+		EAD8356B1964B3C50049C135 /* CannonMissile.png in Resources */ = {isa = PBXBuildFile; fileRef = EAD8355B1964B3C50049C135 /* CannonMissile.png */; };
+		EAD8356C1964B3C50049C135 /* Player-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = EAD8355C1964B3C50049C135 /* Player-hd.png */; };
+		EAD8356D1964B3C50049C135 /* Player.png in Resources */ = {isa = PBXBuildFile; fileRef = EAD8355D1964B3C50049C135 /* Player.png */; };
+		EAD8356E1964B3C50049C135 /* PlayerMissile-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = EAD8355E1964B3C50049C135 /* PlayerMissile-hd.png */; };
+		EAD8356F1964B3C50049C135 /* PlayerMissile.png in Resources */ = {isa = PBXBuildFile; fileRef = EAD8355F1964B3C50049C135 /* PlayerMissile.png */; };
+		EAD835701964B3C50049C135 /* Turret-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = EAD835601964B3C50049C135 /* Turret-hd.png */; };
+		EAD835711964B3C50049C135 /* Turret.png in Resources */ = {isa = PBXBuildFile; fileRef = EAD835611964B3C50049C135 /* Turret.png */; };
+		EAD835721964B3C50049C135 /* Collision.wav in Resources */ = {isa = PBXBuildFile; fileRef = EAD835631964B3C50049C135 /* Collision.wav */; };
+		EAD835731964B3C50049C135 /* Hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = EAD835641964B3C50049C135 /* Hit.wav */; };
+		EAD835741964B3C50049C135 /* Shoot.wav in Resources */ = {isa = PBXBuildFile; fileRef = EAD835651964B3C50049C135 /* Shoot.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +75,21 @@
 		EAD835461964B3680049C135 /* TrigBlasterSKTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TrigBlasterSKTests-Info.plist"; sourceTree = "<group>"; };
 		EAD835481964B3680049C135 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EAD8354A1964B3680049C135 /* TrigBlasterSKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrigBlasterSKTests.m; sourceTree = "<group>"; };
+		EAD835561964B3C50049C135 /* Asteroid-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Asteroid-hd.png"; sourceTree = "<group>"; };
+		EAD835571964B3C50049C135 /* Asteroid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Asteroid.png; sourceTree = "<group>"; };
+		EAD835581964B3C50049C135 /* Cannon-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cannon-hd.png"; sourceTree = "<group>"; };
+		EAD835591964B3C50049C135 /* Cannon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cannon.png; sourceTree = "<group>"; };
+		EAD8355A1964B3C50049C135 /* CannonMissile-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CannonMissile-hd.png"; sourceTree = "<group>"; };
+		EAD8355B1964B3C50049C135 /* CannonMissile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CannonMissile.png; sourceTree = "<group>"; };
+		EAD8355C1964B3C50049C135 /* Player-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Player-hd.png"; sourceTree = "<group>"; };
+		EAD8355D1964B3C50049C135 /* Player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Player.png; sourceTree = "<group>"; };
+		EAD8355E1964B3C50049C135 /* PlayerMissile-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlayerMissile-hd.png"; sourceTree = "<group>"; };
+		EAD8355F1964B3C50049C135 /* PlayerMissile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayerMissile.png; sourceTree = "<group>"; };
+		EAD835601964B3C50049C135 /* Turret-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Turret-hd.png"; sourceTree = "<group>"; };
+		EAD835611964B3C50049C135 /* Turret.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Turret.png; sourceTree = "<group>"; };
+		EAD835631964B3C50049C135 /* Collision.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Collision.wav; sourceTree = "<group>"; };
+		EAD835641964B3C50049C135 /* Hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Hit.wav; sourceTree = "<group>"; };
+		EAD835651964B3C50049C135 /* Shoot.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Shoot.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +151,7 @@
 		EAD835201964B3670049C135 /* TrigBlasterSK */ = {
 			isa = PBXGroup;
 			children = (
+				EAD835541964B3C50049C135 /* Art */,
 				EAD835291964B3670049C135 /* AppDelegate.h */,
 				EAD8352A1964B3670049C135 /* AppDelegate.m */,
 				EAD8352C1964B3670049C135 /* Main.storyboard */,
@@ -162,6 +193,44 @@
 				EAD835471964B3680049C135 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EAD835541964B3C50049C135 /* Art */ = {
+			isa = PBXGroup;
+			children = (
+				EAD835551964B3C50049C135 /* Images */,
+				EAD835621964B3C50049C135 /* Sounds */,
+			);
+			path = Art;
+			sourceTree = "<group>";
+		};
+		EAD835551964B3C50049C135 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				EAD835561964B3C50049C135 /* Asteroid-hd.png */,
+				EAD835571964B3C50049C135 /* Asteroid.png */,
+				EAD835581964B3C50049C135 /* Cannon-hd.png */,
+				EAD835591964B3C50049C135 /* Cannon.png */,
+				EAD8355A1964B3C50049C135 /* CannonMissile-hd.png */,
+				EAD8355B1964B3C50049C135 /* CannonMissile.png */,
+				EAD8355C1964B3C50049C135 /* Player-hd.png */,
+				EAD8355D1964B3C50049C135 /* Player.png */,
+				EAD8355E1964B3C50049C135 /* PlayerMissile-hd.png */,
+				EAD8355F1964B3C50049C135 /* PlayerMissile.png */,
+				EAD835601964B3C50049C135 /* Turret-hd.png */,
+				EAD835611964B3C50049C135 /* Turret.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		EAD835621964B3C50049C135 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				EAD835631964B3C50049C135 /* Collision.wav */,
+				EAD835641964B3C50049C135 /* Hit.wav */,
+				EAD835651964B3C50049C135 /* Shoot.wav */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,10 +309,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAD835731964B3C50049C135 /* Hit.wav in Resources */,
 				EAD835251964B3670049C135 /* InfoPlist.strings in Resources */,
 				EAD835381964B3670049C135 /* Images.xcassets in Resources */,
+				EAD8356D1964B3C50049C135 /* Player.png in Resources */,
+				EAD835711964B3C50049C135 /* Turret.png in Resources */,
+				EAD8356C1964B3C50049C135 /* Player-hd.png in Resources */,
+				EAD835701964B3C50049C135 /* Turret-hd.png in Resources */,
+				EAD835691964B3C50049C135 /* Cannon.png in Resources */,
 				EAD835361964B3670049C135 /* Spaceship.png in Resources */,
+				EAD835681964B3C50049C135 /* Cannon-hd.png in Resources */,
+				EAD8356B1964B3C50049C135 /* CannonMissile.png in Resources */,
+				EAD835661964B3C50049C135 /* Asteroid-hd.png in Resources */,
+				EAD8356E1964B3C50049C135 /* PlayerMissile-hd.png in Resources */,
+				EAD835671964B3C50049C135 /* Asteroid.png in Resources */,
+				EAD835741964B3C50049C135 /* Shoot.wav in Resources */,
+				EAD8356F1964B3C50049C135 /* PlayerMissile.png in Resources */,
 				EAD8352E1964B3670049C135 /* Main.storyboard in Resources */,
+				EAD8356A1964B3C50049C135 /* CannonMissile-hd.png in Resources */,
+				EAD835721964B3C50049C135 /* Collision.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
