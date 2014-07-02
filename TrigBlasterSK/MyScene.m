@@ -7,6 +7,7 @@
 //
 
 @import CoreMotion;
+@import AVFoundation;
 #import "MyScene.h"
 
 #define SK_DEGREES_TO_RADIANS(__ANGLE__) ((__ANGLE__) * 0.01745329252f) // PI / 180
@@ -20,6 +21,11 @@ const float BorderCollisionDamping = 0.4f;
 const int MaxHP = 100;
 const float HealthBarWidth = 40.0f;
 const float HealthBarHeight = 4.0f;
+
+const float CannonCollisionRadius = 20.0f;
+const float PlayerCollisionRadius = 10.0f;
+
+const float CannonCollisionSpeed = 200.0f;
 
 @implementation MyScene
 {
@@ -49,6 +55,8 @@ const float HealthBarHeight = 4.0f;
     int _cannonHP;
     SKNode *_playerHealthBar;
     SKNode *_cannonHealthBar;
+    
+    SKAction *_collisionSound;
 }
 
 -(id)initWithSize:(CGSize)size {
@@ -86,6 +94,8 @@ const float HealthBarHeight = 4.0f;
         
         _playerHP = MaxHP;
         _cannonHP = MaxHP;
+        
+        _collisionSound = [SKAction playSoundFileNamed:@"Collision.wav" waitForCompletion:NO];
 
     }
     return self;
@@ -305,6 +315,35 @@ const float HealthBarHeight = 4.0f;
     [node addChild:frameSprite];
 }
 
+- (void)checkCollisionOfPlayerWithCannon
+{
+    float deltaX = _playerSprite.position.x - _turretSprite.position.x;
+    float deltaY = _playerSprite.position.y - _turretSprite.position.y;
+    
+    float distance = sqrtf(deltaX*deltaX + deltaY*deltaY);
+    
+    if (distance <= CannonCollisionRadius + PlayerCollisionRadius)
+    {
+        /*
+        const float CannonCollisionDamping = 0.8f;
+        _playerAccelX = -_playerAccelX * CannonCollisionDamping;
+        _playerSpeedX = -_playerSpeedX * CannonCollisionDamping;
+        _playerAccelY = -_playerAccelY * CannonCollisionDamping;
+        _playerSpeedY = -_playerSpeedY * CannonCollisionDamping;
+         */
+        float angle = atan2f(deltaY, deltaX);
+        
+        _playerSpeedX = cosf(angle) * CannonCollisionSpeed;
+        _playerSpeedY = sinf(angle) * CannonCollisionSpeed;
+        _playerAccelX = 0.0f;
+        _playerAccelY = 0.0f;
+        
+        _playerHP = MAX(0, _playerHP - 20);
+        _cannonHP = MAX(0, _cannonHP - 5);
+        [self runAction:_collisionSound];
+    }
+}
+
 
 -(void)update:(NSTimeInterval)currentTime {
     /* Called before each frame is rendered */
@@ -321,6 +360,7 @@ const float HealthBarHeight = 4.0f;
     [self updatePlayerAccelerationFromMotionManager];
     [self updatePlayer:_deltaTime];
     [self updateTurret:_deltaTime];
+    [self checkCollisionOfPlayerWithCannon];
     [self drawHealthBar:_playerHealthBar withName:@"playerHealth" andHealthPoints:_playerHP];
     [self drawHealthBar:_cannonHealthBar withName:@"cannonHealth" andHealthPoints:_cannonHP];
 }
