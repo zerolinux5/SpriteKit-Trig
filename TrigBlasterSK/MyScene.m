@@ -39,6 +39,8 @@ const float OrbiterSpeed = 120.0f;  // degrees per second
 const float OrbiterRadius = 60.0f;  // degrees
 const float OrbiterCollisionRadius = 20.0f;
 
+const CFTimeInterval DarkenDuration = 2.0;
+
 @implementation MyScene
 {
     CGSize _winSize;
@@ -84,6 +86,13 @@ const float OrbiterCollisionRadius = 20.0f;
     
     SKSpriteNode *_orbiterSprite;
     float _orbiterAngle;  // in degrees
+    
+    SKLabelNode *_gameOverLabel;
+    SKSpriteNode *_darkenLayer;
+    BOOL _gameOver;
+    CFTimeInterval _gameOverElapsed;
+    
+    float _gameOverDampen;
 }
 
 -(id)initWithSize:(CGSize)size {
@@ -471,6 +480,15 @@ const float OrbiterCollisionRadius = 20.0f;
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (_gameOver)
+    {
+        
+        SKScene *scene = [[MyScene alloc] initWithSize:self.size];
+        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:1.0];
+        [self.view presentScene:scene transition:reveal];
+        return;
+    }
+    
     if (CACurrentMediaTime() - _touchTime < 0.3 && _playerMissileSprite.hidden)
     {
         UITouch *touch = [touches anyObject];
@@ -609,6 +627,53 @@ const float OrbiterCollisionRadius = 20.0f;
     }
 }
 
+- (void)checkGameOver:(NSTimeInterval)dt
+{
+    // 1
+    if (_playerHP > 0 && _cannonHP > 0)  // not game over yet
+    {
+        return;
+    }
+    
+    if (!_gameOver)
+    {
+        // 2
+        _gameOver = YES;
+        _gameOverDampen = 1.0f;
+        _gameOverElapsed = 0.0;
+        [self stopMonitoringAcceleration];
+        
+        // 3
+        UIColor *fillColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:1.0f];
+        _darkenLayer = [SKSpriteNode spriteNodeWithColor:fillColor size:_winSize];
+        _darkenLayer.alpha = 0.0;
+        _darkenLayer.position = CGPointMake(_winSize.width/2.0f, _winSize.height/2.0f);
+        [self addChild:_darkenLayer];
+        
+        // 4
+        NSString *text = (_playerHP == 0) ? @"GAME OVER" : @"Victory!";
+        _gameOverLabel = [[SKLabelNode alloc] initWithFontNamed:@"Helvetica"];
+        _gameOverLabel.text = text;
+        _gameOverLabel.fontSize = 24.0f;
+        _gameOverLabel.position = CGPointMake(_winSize.width/2.0f + 0.5f, _winSize.height/2.0f + 50.0f);
+        [self addChild:_gameOverLabel];
+    }
+    else
+    {
+        _gameOverElapsed += dt;
+        if (_gameOverElapsed < DarkenDuration)
+        {
+            float t = _gameOverElapsed / DarkenDuration;
+            t = sinf(t * M_PI_2);  // ease out
+            _darkenLayer.alpha = (200.0f * t)/255.0;
+        }
+        // Game Over Label Position
+        float y = fabsf(cosf(_gameOverElapsed * 3.0f)) * 50.0f * _gameOverDampen;
+        _gameOverDampen = fmaxf(0.0f, _gameOverDampen - 0.3f * dt);
+        _gameOverLabel.position = CGPointMake(_gameOverLabel.position.x, _winSize.height/2.0f + y);
+    }
+}
+
 -(void)update:(NSTimeInterval)currentTime {
     /* Called before each frame is rendered */
     
@@ -630,6 +695,7 @@ const float OrbiterCollisionRadius = 20.0f;
     [self drawHealthBar:_playerHealthBar withName:@"playerHealth" andHealthPoints:_playerHP];
     [self drawHealthBar:_cannonHealthBar withName:@"cannonHealth" andHealthPoints:_cannonHP];
     [self updateOrbiter:_deltaTime];
+    [self checkGameOver:_deltaTime];
 }
 
 @end
