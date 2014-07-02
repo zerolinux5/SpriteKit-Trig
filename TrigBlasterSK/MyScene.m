@@ -37,6 +37,9 @@ const float BorderCollisionDamping = 0.4f;
     
     float _playerAngle;
     float _lastAngle;
+    
+    SKSpriteNode *_cannonSprite;
+    SKSpriteNode *_turretSprite;
 }
 
 -(id)initWithSize:(CGSize)size {
@@ -46,6 +49,14 @@ const float BorderCollisionDamping = 0.4f;
         self.backgroundColor = [SKColor colorWithRed:94.0/255.0 green:63.0/255.0 blue:107.0/255.0 alpha:1.0];
         
         _winSize = CGSizeMake(size.width, size.height);
+        
+        _cannonSprite = [SKSpriteNode spriteNodeWithImageNamed:@"Cannon"];
+        _cannonSprite.position = CGPointMake(_winSize.width/2.0f, _winSize.height/2.0f);
+        [self addChild:_cannonSprite];
+        
+        _turretSprite = [SKSpriteNode spriteNodeWithImageNamed:@"Turret"];
+        _turretSprite.position = CGPointMake(_winSize.width/2.0f, _winSize.height/2.0f);
+        [self addChild:_turretSprite];
         
         _playerSprite = [SKSpriteNode spriteNodeWithImageNamed:@"Player"];
         _playerSprite.position = CGPointMake(_winSize.width - 50.0f, 60.0f);
@@ -214,6 +225,15 @@ const float BorderCollisionDamping = 0.4f;
     _playerSprite.zRotation = _playerAngle - SK_DEGREES_TO_RADIANS(90.0f);
 }
 
+- (void)updateTurret:(NSTimeInterval)dt
+{
+    float deltaX = _playerSprite.position.x - _turretSprite.position.x;
+    float deltaY = _playerSprite.position.y - _turretSprite.position.y;
+    float angle = atan2f(deltaY, deltaX);
+    
+    _turretSprite.zRotation = angle - SK_DEGREES_TO_RADIANS(90.0f);
+}
+
 
 -(void)update:(NSTimeInterval)currentTime {
     /* Called before each frame is rendered */
@@ -229,6 +249,7 @@ const float BorderCollisionDamping = 0.4f;
     
     [self updatePlayerAccelerationFromMotionManager];
     [self updatePlayer:_deltaTime];
+    [self updateTurret:_deltaTime];
 }
 
 @end
