@@ -17,6 +17,10 @@ const float MaxPlayerSpeed = 200.0f;
 
 const float BorderCollisionDamping = 0.4f;
 
+const int MaxHP = 100;
+const float HealthBarWidth = 40.0f;
+const float HealthBarHeight = 4.0f;
+
 @implementation MyScene
 {
     CGSize _winSize;
@@ -40,6 +44,11 @@ const float BorderCollisionDamping = 0.4f;
     
     SKSpriteNode *_cannonSprite;
     SKSpriteNode *_turretSprite;
+    
+    int _playerHP;
+    int _cannonHP;
+    SKNode *_playerHealthBar;
+    SKNode *_cannonHealthBar;
 }
 
 -(id)initWithSize:(CGSize)size {
@@ -64,6 +73,19 @@ const float BorderCollisionDamping = 0.4f;
         
         _motionManager = [[CMMotionManager alloc] init];
         [self startMonitoringAcceleration];
+        
+        _playerHealthBar = [SKNode node];
+        [self addChild:_playerHealthBar];
+        
+        _cannonHealthBar = [SKNode node];
+        [self addChild:_cannonHealthBar];
+        
+        _cannonHealthBar.position = CGPointMake(
+                                                _cannonSprite.position.x - HealthBarWidth/2.0f + 0.5f,
+                                                _cannonSprite.position.y - _cannonSprite.size.height/2.0f - 10.0f + 0.5f);
+        
+        _playerHP = MaxHP;
+        _cannonHP = MaxHP;
 
     }
     return self;
@@ -223,6 +245,10 @@ const float BorderCollisionDamping = 0.4f;
     }
     
     _playerSprite.zRotation = _playerAngle - SK_DEGREES_TO_RADIANS(90.0f);
+    
+    _playerHealthBar.position = CGPointMake(
+                                            _playerSprite.position.x - HealthBarWidth/2.0f + 0.5f,
+                                            _playerSprite.position.y - _playerSprite.size.height/2.0f - 15.0f + 0.5f);
 }
 
 - (void)updateTurret:(NSTimeInterval)dt
@@ -232,6 +258,51 @@ const float BorderCollisionDamping = 0.4f;
     float angle = atan2f(deltaY, deltaX);
     
     _turretSprite.zRotation = angle - SK_DEGREES_TO_RADIANS(90.0f);
+}
+
+-(void) drawHealthBar:(SKNode *)node withName:(NSString *)name andHealthPoints:(int)hp
+{
+    [node removeAllChildren];
+    
+    float widthOfHealth = (HealthBarWidth - 2.0f)*hp/MaxHP;
+    
+    UIColor *clearColor = [UIColor clearColor];
+    UIColor *fillColor = [UIColor colorWithRed:113.0f/255.0f green:202.0f/255.0f blue:53.0f/255.0f alpha:1.0f];
+    UIColor *borderColor = [UIColor colorWithRed:35.0f/255.0f green:28.0f/255.0f blue:40.0f/255.0f alpha:1.0f];
+    
+    //create the outline for the health bar
+    CGSize outlineRectSize = CGSizeMake(HealthBarWidth-1.0f, HealthBarHeight-1.0);
+    UIGraphicsBeginImageContextWithOptions(outlineRectSize, NO, 0.0);
+    CGContextRef healthBarContext = UIGraphicsGetCurrentContext();
+    
+    //Drawing the outline for the health bar
+    CGRect spriteOutlineRect = CGRectMake(0.0, 0.0, HealthBarWidth-1.0f, HealthBarHeight-1.0f);
+    CGContextSetStrokeColorWithColor(healthBarContext, borderColor.CGColor);
+    CGContextSetLineWidth(healthBarContext, 1.0);
+    CGContextAddRect(healthBarContext, spriteOutlineRect);
+    CGContextStrokePath(healthBarContext);
+    
+    //Fill the health bar with a filled rectangle
+    CGRect spriteFillRect = CGRectMake(0.5, 0.5, outlineRectSize.width-1.0, outlineRectSize.height-1.0);
+    spriteFillRect.size.width = widthOfHealth;
+    CGContextSetFillColorWithColor(healthBarContext, fillColor.CGColor);
+    CGContextSetStrokeColorWithColor(healthBarContext, clearColor.CGColor);
+    CGContextSetLineWidth(healthBarContext, 1.0);
+    CGContextFillRect(healthBarContext, spriteFillRect);
+    
+    //Generate a sprite image of the two pieces for display
+    UIImage *spriteImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    CGImageRef spriteCGImageRef = [spriteImage CGImage];
+    SKTexture *spriteTexture = [SKTexture textureWithCGImage:spriteCGImageRef];
+    spriteTexture.filteringMode = SKTextureFilteringLinear; //This is the default anyway
+    SKSpriteNode *frameSprite = [SKSpriteNode spriteNodeWithTexture:spriteTexture size:outlineRectSize];
+    frameSprite.position = CGPointZero;
+    frameSprite.name = name;
+    frameSprite.anchorPoint = CGPointMake(0.0, 0.5);
+    
+    [node addChild:frameSprite];
 }
 
 
@@ -250,6 +321,8 @@ const float BorderCollisionDamping = 0.4f;
     [self updatePlayerAccelerationFromMotionManager];
     [self updatePlayer:_deltaTime];
     [self updateTurret:_deltaTime];
+    [self drawHealthBar:_playerHealthBar withName:@"playerHealth" andHealthPoints:_playerHP];
+    [self drawHealthBar:_cannonHealthBar withName:@"cannonHealth" andHealthPoints:_cannonHP];
 }
 
 @end
