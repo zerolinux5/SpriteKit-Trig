@@ -29,6 +29,8 @@ const float CannonCollisionSpeed = 200.0f;
 
 const float Margin = 20.0f;
 
+const float PlayerMissileSpeed = 300.0f;
+
 @implementation MyScene
 {
     CGSize _winSize;
@@ -434,7 +436,12 @@ const float Margin = 20.0f;
             
             // 2
             //set up the sequence of actions for the firing
-            SKAction *missileMoveAction = [SKAction moveTo:destination duration:2.0f];
+            float hypotenuse = sqrtf(adjacent*adjacent + opposite*opposite);
+            NSTimeInterval duration = hypotenuse / PlayerMissileSpeed;
+            
+            //set up the sequence of actions for the firing
+            SKAction *missileMoveAction = [SKAction moveTo:destination duration:duration];
+            
             SKAction *missileDoneMoveAction = [SKAction runBlock:(dispatch_block_t)^() {
                 _playerMissileSprite.hidden = YES;
             }];
