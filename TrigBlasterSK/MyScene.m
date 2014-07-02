@@ -35,6 +35,10 @@ const float CannonHitRadius = 25.0f;
 
 const float PlayerHitRadius = 10.0f;
 
+const float OrbiterSpeed = 120.0f;  // degrees per second
+const float OrbiterRadius = 60.0f;  // degrees
+const float OrbiterCollisionRadius = 20.0f;
+
 @implementation MyScene
 {
     CGSize _winSize;
@@ -77,6 +81,9 @@ const float PlayerHitRadius = 10.0f;
     
     //cannon missile implementation
     SKSpriteNode *_cannonMissileSprite;
+    
+    SKSpriteNode *_orbiterSprite;
+    float _orbiterAngle;  // in degrees
 }
 
 -(id)initWithSize:(CGSize)size {
@@ -127,6 +134,9 @@ const float PlayerHitRadius = 10.0f;
         _cannonMissileSprite = [SKSpriteNode spriteNodeWithImageNamed:@"CannonMissile"];
         _cannonMissileSprite.hidden = YES;
         [self addChild:_cannonMissileSprite];
+        
+        _orbiterSprite = [SKSpriteNode spriteNodeWithImageNamed:@"Asteroid"];
+        [self addChild:_orbiterSprite];
 
     }
     return self;
@@ -309,13 +319,15 @@ const float PlayerHitRadius = 10.0f;
     float angle = atan2f(deltaY, deltaX);
     
     _turretSprite.zRotation = angle - SK_DEGREES_TO_RADIANS(90.0f);
-    [self updateMissileDirection:angle];
+    
+    if (_cannonMissileSprite.hidden) {
+        [self updateMissileDirection:angle];
+    }
 }
 
 -(void) updateMissileDirection:(float) angle
 {
     //adding cannon missile logic
-    if (_cannonMissileSprite.hidden) {
         _cannonMissileSprite.zRotation = angle - SK_DEGREES_TO_RADIANS(90.0f);
         
         _cannonMissileSprite.position = _turretSprite.position;
@@ -370,7 +382,6 @@ const float PlayerHitRadius = 10.0f;
         SKAction *moveMissileActionWithDone = [SKAction sequence:@[_missileShootSound, missileMoveAction, missileDoneMoveAction]];
         
         [_cannonMissileSprite runAction:moveMissileActionWithDone];
-    }
 }
 
 -(void) drawHealthBar:(SKNode *)node withName:(NSString *)name andHealthPoints:(int)hp
@@ -567,6 +578,36 @@ const float PlayerHitRadius = 10.0f;
     }
 }
 
+- (void)updateOrbiter:(NSTimeInterval)dt
+{
+    // 1
+    _orbiterAngle += OrbiterSpeed * dt;
+    _orbiterAngle = fmodf(_orbiterAngle, 360.0f);
+    
+    // 2
+    float x = cosf(SK_DEGREES_TO_RADIANS(_orbiterAngle)) * OrbiterRadius;
+    float y = sinf(SK_DEGREES_TO_RADIANS(_orbiterAngle)) * OrbiterRadius;
+    
+    // 3
+    _orbiterSprite.position = CGPointMake(_cannonSprite.position.x + x, _cannonSprite.position.y + y);
+    _orbiterSprite.zRotation = SK_DEGREES_TO_RADIANS(_orbiterAngle);
+    
+    if (!_playerMissileSprite.hidden)
+    {
+        float deltaX = _playerMissileSprite.position.x - _orbiterSprite.position.x;
+        float deltaY = _playerMissileSprite.position.y - _orbiterSprite.position.y;
+        
+        float distance = sqrtf(deltaX*deltaX + deltaY*deltaY);
+        if (distance < OrbiterCollisionRadius)
+        {
+            _playerMissileSprite.hidden = YES;
+            [_playerMissileSprite removeAllActions];
+            
+            _orbiterSprite.scale = 2.0f;
+            [_orbiterSprite runAction:[SKAction scaleTo:1.0f duration:0.5f]];
+        }
+    }
+}
 
 -(void)update:(NSTimeInterval)currentTime {
     /* Called before each frame is rendered */
@@ -588,6 +629,7 @@ const float PlayerHitRadius = 10.0f;
     [self checkCollisionOfPlayerWithCannon];
     [self drawHealthBar:_playerHealthBar withName:@"playerHealth" andHealthPoints:_playerHP];
     [self drawHealthBar:_cannonHealthBar withName:@"cannonHealth" andHealthPoints:_cannonHP];
+    [self updateOrbiter:_deltaTime];
 }
 
 @end
