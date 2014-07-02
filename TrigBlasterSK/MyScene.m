@@ -33,6 +33,8 @@ const float PlayerMissileSpeed = 300.0f;
 
 const float CannonHitRadius = 25.0f;
 
+const float PlayerHitRadius = 10.0f;
+
 @implementation MyScene
 {
     CGSize _winSize;
@@ -72,6 +74,9 @@ const float CannonHitRadius = 25.0f;
     
     SKAction *_missileShootSound;
     SKAction *_missileHitSound;
+    
+    //cannon missile implementation
+    SKSpriteNode *_cannonMissileSprite;
 }
 
 -(id)initWithSize:(CGSize)size {
@@ -117,6 +122,11 @@ const float CannonHitRadius = 25.0f;
         [self addChild:_playerMissileSprite];
         
         _missileShootSound = [SKAction playSoundFileNamed:@"Shoot.wav" waitForCompletion:NO];
+        
+        //cannon missile sprite creation
+        _cannonMissileSprite = [SKSpriteNode spriteNodeWithImageNamed:@"CannonMissile"];
+        _cannonMissileSprite.hidden = YES;
+        [self addChild:_cannonMissileSprite];
 
     }
     return self;
@@ -299,6 +309,65 @@ const float CannonHitRadius = 25.0f;
     float angle = atan2f(deltaY, deltaX);
     
     _turretSprite.zRotation = angle - SK_DEGREES_TO_RADIANS(90.0f);
+    
+    
+    //adding cannon missile logic
+    if (_cannonMissileSprite.hidden) {
+            _cannonMissileSprite.zRotation = angle - SK_DEGREES_TO_RADIANS(90.0f);
+            
+            _cannonMissileSprite.position = _turretSprite.position;
+            _cannonMissileSprite.hidden = NO;
+            
+            float adjacent, opposite;
+            CGPoint destination;
+            
+            // 1
+            if (angle <= -M_PI_4 && angle > -3.0f * M_PI_4)
+            {
+                // Shoot down
+                angle = M_PI_2 - angle;
+                adjacent = _cannonMissileSprite.position.y + Margin;
+                opposite = tanf(angle) * adjacent;
+                destination = CGPointMake(_cannonMissileSprite.position.x - opposite, -Margin);
+            }
+            else if (angle > M_PI_4 && angle <= 3.0f * M_PI_4)
+            {
+                // Shoot up
+                angle = M_PI_2 - angle;
+                adjacent = _winSize.height - _cannonMissileSprite.position.y + Margin;
+                opposite = tanf(angle) * adjacent;
+                destination = CGPointMake(_cannonMissileSprite.position.x + opposite, _winSize.height + Margin);
+            }
+            else if (angle <= M_PI_4 && angle > -M_PI_4)
+            {
+                // Shoot right
+                adjacent = _winSize.width - _cannonMissileSprite.position.x + Margin;
+                opposite = tanf(angle) * adjacent;
+                destination = CGPointMake(_winSize.width + Margin, _cannonMissileSprite.position.y + opposite);
+            }
+            else  // angle > 3.0f * M_PI_4 || angle <= -3.0f * M_PI_4
+            {
+                // Shoot left
+                adjacent = _cannonMissileSprite.position.x + Margin;
+                opposite = tanf(angle) * adjacent;
+                destination = CGPointMake(-Margin, _cannonMissileSprite.position.y - opposite);
+            }
+            
+            // 2
+            //set up the sequence of actions for the firing
+            float hypotenuse = sqrtf(adjacent*adjacent + opposite*opposite);
+            NSTimeInterval duration = hypotenuse / PlayerMissileSpeed;
+            
+            //set up the sequence of actions for the firing
+            SKAction *missileMoveAction = [SKAction moveTo:destination duration:duration];
+            
+            SKAction *missileDoneMoveAction = [SKAction runBlock:(dispatch_block_t)^() {
+                _cannonMissileSprite.hidden = YES;
+            }];
+            SKAction *moveMissileActionWithDone = [SKAction sequence:@[_missileShootSound, missileMoveAction, missileDoneMoveAction]];
+            
+            [_cannonMissileSprite runAction:moveMissileActionWithDone];
+    }
 }
 
 -(void) drawHealthBar:(SKNode *)node withName:(NSString *)name andHealthPoints:(int)hp
@@ -475,6 +544,26 @@ const float CannonHitRadius = 25.0f;
     }
 }
 
+- (void)updateCannonMissile:(NSTimeInterval)dt
+{
+    if (!_cannonMissileSprite.hidden)
+    {
+        float deltaX = _cannonMissileSprite.position.x - _playerSprite.position.x;
+        float deltaY = _cannonMissileSprite.position.y - _playerSprite.position.y;
+        
+        float distance = sqrtf(deltaX*deltaX + deltaY*deltaY);
+        if (distance < PlayerHitRadius)
+        {
+            [self runAction:_missileHitSound];
+            
+            _playerHP = MAX(0, _playerHP - 10);
+            
+            _cannonMissileSprite.hidden = YES;
+            [_cannonMissileSprite removeAllActions];
+        }
+    }
+}
+
 
 -(void)update:(NSTimeInterval)currentTime {
     /* Called before each frame is rendered */
@@ -491,6 +580,7 @@ const float CannonHitRadius = 25.0f;
     [self updatePlayerAccelerationFromMotionManager];
     [self updatePlayer:_deltaTime];
     [self updatePlayerMissile:_deltaTime];
+    [self updateCannonMissile:_deltaTime];
     [self updateTurret:_deltaTime];
     [self checkCollisionOfPlayerWithCannon];
     [self drawHealthBar:_playerHealthBar withName:@"playerHealth" andHealthPoints:_playerHP];
