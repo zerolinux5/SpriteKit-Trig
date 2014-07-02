@@ -27,6 +27,8 @@ const float PlayerCollisionRadius = 10.0f;
 
 const float CannonCollisionSpeed = 200.0f;
 
+const float Margin = 20.0f;
+
 @implementation MyScene
 {
     CGSize _winSize;
@@ -59,6 +61,12 @@ const float CannonCollisionSpeed = 200.0f;
     SKAction *_collisionSound;
     
     float _playerSpin;
+    
+    SKSpriteNode *_playerMissileSprite;
+    CGPoint _touchLocation;
+    CFTimeInterval _touchTime;
+    
+    SKAction *_missileShootSound;
 }
 
 -(id)initWithSize:(CGSize)size {
@@ -98,6 +106,12 @@ const float CannonCollisionSpeed = 200.0f;
         _cannonHP = MaxHP;
         
         _collisionSound = [SKAction playSoundFileNamed:@"Collision.wav" waitForCompletion:NO];
+        
+        _playerMissileSprite = [SKSpriteNode spriteNodeWithImageNamed:@"PlayerMissile"];
+        _playerMissileSprite.hidden = YES;
+        [self addChild:_playerMissileSprite];
+        
+        _missileShootSound = [SKAction playSoundFileNamed:@"Shoot.wav" waitForCompletion:NO];
 
     }
     return self;
@@ -356,6 +370,78 @@ const float CannonCollisionSpeed = 200.0f;
         _playerSpin = 180.0f * 3.0f;
         
         [self runAction:_collisionSound];
+    }
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInNode:self];
+    _touchLocation = location;
+    _touchTime = CACurrentMediaTime();
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    if (CACurrentMediaTime() - _touchTime < 0.3 && _playerMissileSprite.hidden)
+    {
+        UITouch *touch = [touches anyObject];
+        CGPoint location = [touch locationInNode:self];
+        CGPoint diff = CGPointMake(location.x - _touchLocation.x, location.y - _touchLocation.y);
+        float diffLength = sqrtf(diff.x*diff.x + diff.y*diff.y);
+        if (diffLength > 4.0f)
+        {
+            float angle = atan2f(diff.y, diff.x);
+            _playerMissileSprite.zRotation = angle - SK_DEGREES_TO_RADIANS(90.0f);
+            
+            _playerMissileSprite.position = _playerSprite.position;
+            _playerMissileSprite.hidden = NO;
+            
+            float adjacent, opposite;
+            CGPoint destination;
+            
+            // 1
+            if (angle <= -M_PI_4 && angle > -3.0f * M_PI_4)
+            {
+                // Shoot down
+                angle = M_PI_2 - angle;
+                adjacent = _playerMissileSprite.position.y + Margin;
+                opposite = tanf(angle) * adjacent;
+                destination = CGPointMake(_playerMissileSprite.position.x - opposite, -Margin);
+            }
+            else if (angle > M_PI_4 && angle <= 3.0f * M_PI_4)
+            {
+                // Shoot up
+                angle = M_PI_2 - angle;
+                adjacent = _winSize.height - _playerMissileSprite.position.y + Margin;
+                opposite = tanf(angle) * adjacent;
+                destination = CGPointMake(_playerMissileSprite.position.x + opposite, _winSize.height + Margin);
+            }
+            else if (angle <= M_PI_4 && angle > -M_PI_4)
+            {
+                // Shoot right
+                adjacent = _winSize.width - _playerMissileSprite.position.x + Margin;
+                opposite = tanf(angle) * adjacent;
+                destination = CGPointMake(_winSize.width + Margin, _playerMissileSprite.position.y + opposite);
+            }
+            else  // angle > 3.0f * M_PI_4 || angle <= -3.0f * M_PI_4
+            {
+                // Shoot left
+                adjacent = _playerMissileSprite.position.x + Margin;
+                opposite = tanf(angle) * adjacent;
+                destination = CGPointMake(-Margin, _playerMissileSprite.position.y - opposite);
+            }
+            
+            // 2
+            //set up the sequence of actions for the firing
+            SKAction *missileMoveAction = [SKAction moveTo:destination duration:2.0f];
+            SKAction *missileDoneMoveAction = [SKAction runBlock:(dispatch_block_t)^() {
+                _playerMissileSprite.hidden = YES;
+            }];
+            SKAction *moveMissileActionWithDone = [SKAction sequence:@[_missileShootSound, missileMoveAction, missileDoneMoveAction]];
+            
+            [_playerMissileSprite runAction:moveMissileActionWithDone];
+        }
     }
 }
 
