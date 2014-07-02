@@ -164,8 +164,15 @@ const float BorderCollisionDamping = 0.4f;
     }
     
     _playerSprite.position = CGPointMake(newX, newY);
-    float angle = atan2f(_playerSpeedY, _playerSpeedX);
-    _playerSprite.zRotation = angle - SK_DEGREES_TO_RADIANS(90);
+    //float angle = atan2f(_playerSpeedY, _playerSpeedX);
+    //_playerSprite.zRotation = angle - SK_DEGREES_TO_RADIANS(90);
+    
+    float speed = sqrtf(_playerSpeedX*_playerSpeedX + _playerSpeedY*_playerSpeedY);
+    if (speed > 40.0f)
+    {
+        float angle = atan2f(_playerSpeedY, _playerSpeedX);
+        _playerSprite.zRotation = angle - SK_DEGREES_TO_RADIANS(90.0f);
+    }
 }
 
 
