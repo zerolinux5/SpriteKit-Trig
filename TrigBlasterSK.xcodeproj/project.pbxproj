@@ -1,0 +1,487 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EAD835191964B3670049C135 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD835181964B3670049C135 /* Foundation.framework */; };
+		EAD8351B1964B3670049C135 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD8351A1964B3670049C135 /* CoreGraphics.framework */; };
+		EAD8351D1964B3670049C135 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD8351C1964B3670049C135 /* UIKit.framework */; };
+		EAD8351F1964B3670049C135 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD8351E1964B3670049C135 /* SpriteKit.framework */; };
+		EAD835251964B3670049C135 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EAD835231964B3670049C135 /* InfoPlist.strings */; };
+		EAD835271964B3670049C135 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD835261964B3670049C135 /* main.m */; };
+		EAD8352B1964B3670049C135 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD8352A1964B3670049C135 /* AppDelegate.m */; };
+		EAD8352E1964B3670049C135 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAD8352C1964B3670049C135 /* Main.storyboard */; };
+		EAD835311964B3670049C135 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD835301964B3670049C135 /* ViewController.m */; };
+		EAD835341964B3670049C135 /* MyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD835331964B3670049C135 /* MyScene.m */; };
+		EAD835361964B3670049C135 /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = EAD835351964B3670049C135 /* Spaceship.png */; };
+		EAD835381964B3670049C135 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAD835371964B3670049C135 /* Images.xcassets */; };
+		EAD8353F1964B3670049C135 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD8353E1964B3670049C135 /* XCTest.framework */; };
+		EAD835401964B3670049C135 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD835181964B3670049C135 /* Foundation.framework */; };
+		EAD835411964B3670049C135 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD8351C1964B3670049C135 /* UIKit.framework */; };
+		EAD835491964B3680049C135 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EAD835471964B3680049C135 /* InfoPlist.strings */; };
+		EAD8354B1964B3680049C135 /* TrigBlasterSKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD8354A1964B3680049C135 /* TrigBlasterSKTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EAD835421964B3670049C135 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAD8350D1964B3670049C135 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EAD835141964B3670049C135;
+			remoteInfo = TrigBlasterSK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EAD835151964B3670049C135 /* TrigBlasterSK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrigBlasterSK.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAD835181964B3670049C135 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		EAD8351A1964B3670049C135 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		EAD8351C1964B3670049C135 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		EAD8351E1964B3670049C135 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		EAD835221964B3670049C135 /* TrigBlasterSK-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TrigBlasterSK-Info.plist"; sourceTree = "<group>"; };
+		EAD835241964B3670049C135 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EAD835261964B3670049C135 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EAD835281964B3670049C135 /* TrigBlasterSK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TrigBlasterSK-Prefix.pch"; sourceTree = "<group>"; };
+		EAD835291964B3670049C135 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EAD8352A1964B3670049C135 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EAD8352D1964B3670049C135 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EAD8352F1964B3670049C135 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		EAD835301964B3670049C135 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		EAD835321964B3670049C135 /* MyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyScene.h; sourceTree = "<group>"; };
+		EAD835331964B3670049C135 /* MyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyScene.m; sourceTree = "<group>"; };
+		EAD835351964B3670049C135 /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
+		EAD835371964B3670049C135 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EAD8353D1964B3670049C135 /* TrigBlasterSKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrigBlasterSKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAD8353E1964B3670049C135 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		EAD835461964B3680049C135 /* TrigBlasterSKTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TrigBlasterSKTests-Info.plist"; sourceTree = "<group>"; };
+		EAD835481964B3680049C135 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EAD8354A1964B3680049C135 /* TrigBlasterSKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrigBlasterSKTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EAD835121964B3670049C135 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAD8351B1964B3670049C135 /* CoreGraphics.framework in Frameworks */,
+				EAD8351D1964B3670049C135 /* UIKit.framework in Frameworks */,
+				EAD8351F1964B3670049C135 /* SpriteKit.framework in Frameworks */,
+				EAD835191964B3670049C135 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EAD8353A1964B3670049C135 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAD8353F1964B3670049C135 /* XCTest.framework in Frameworks */,
+				EAD835411964B3670049C135 /* UIKit.framework in Frameworks */,
+				EAD835401964B3670049C135 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EAD8350C1964B3670049C135 = {
+			isa = PBXGroup;
+			children = (
+				EAD835201964B3670049C135 /* TrigBlasterSK */,
+				EAD835441964B3670049C135 /* TrigBlasterSKTests */,
+				EAD835171964B3670049C135 /* Frameworks */,
+				EAD835161964B3670049C135 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EAD835161964B3670049C135 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EAD835151964B3670049C135 /* TrigBlasterSK.app */,
+				EAD8353D1964B3670049C135 /* TrigBlasterSKTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EAD835171964B3670049C135 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EAD835181964B3670049C135 /* Foundation.framework */,
+				EAD8351A1964B3670049C135 /* CoreGraphics.framework */,
+				EAD8351C1964B3670049C135 /* UIKit.framework */,
+				EAD8351E1964B3670049C135 /* SpriteKit.framework */,
+				EAD8353E1964B3670049C135 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EAD835201964B3670049C135 /* TrigBlasterSK */ = {
+			isa = PBXGroup;
+			children = (
+				EAD835291964B3670049C135 /* AppDelegate.h */,
+				EAD8352A1964B3670049C135 /* AppDelegate.m */,
+				EAD8352C1964B3670049C135 /* Main.storyboard */,
+				EAD8352F1964B3670049C135 /* ViewController.h */,
+				EAD835301964B3670049C135 /* ViewController.m */,
+				EAD835321964B3670049C135 /* MyScene.h */,
+				EAD835331964B3670049C135 /* MyScene.m */,
+				EAD835351964B3670049C135 /* Spaceship.png */,
+				EAD835371964B3670049C135 /* Images.xcassets */,
+				EAD835211964B3670049C135 /* Supporting Files */,
+			);
+			path = TrigBlasterSK;
+			sourceTree = "<group>";
+		};
+		EAD835211964B3670049C135 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EAD835221964B3670049C135 /* TrigBlasterSK-Info.plist */,
+				EAD835231964B3670049C135 /* InfoPlist.strings */,
+				EAD835261964B3670049C135 /* main.m */,
+				EAD835281964B3670049C135 /* TrigBlasterSK-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EAD835441964B3670049C135 /* TrigBlasterSKTests */ = {
+			isa = PBXGroup;
+			children = (
+				EAD8354A1964B3680049C135 /* TrigBlasterSKTests.m */,
+				EAD835451964B3670049C135 /* Supporting Files */,
+			);
+			path = TrigBlasterSKTests;
+			sourceTree = "<group>";
+		};
+		EAD835451964B3670049C135 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EAD835461964B3680049C135 /* TrigBlasterSKTests-Info.plist */,
+				EAD835471964B3680049C135 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EAD835141964B3670049C135 /* TrigBlasterSK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EAD8354E1964B3680049C135 /* Build configuration list for PBXNativeTarget "TrigBlasterSK" */;
+			buildPhases = (
+				EAD835111964B3670049C135 /* Sources */,
+				EAD835121964B3670049C135 /* Frameworks */,
+				EAD835131964B3670049C135 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TrigBlasterSK;
+			productName = TrigBlasterSK;
+			productReference = EAD835151964B3670049C135 /* TrigBlasterSK.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EAD8353C1964B3670049C135 /* TrigBlasterSKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EAD835511964B3680049C135 /* Build configuration list for PBXNativeTarget "TrigBlasterSKTests" */;
+			buildPhases = (
+				EAD835391964B3670049C135 /* Sources */,
+				EAD8353A1964B3670049C135 /* Frameworks */,
+				EAD8353B1964B3670049C135 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EAD835431964B3670049C135 /* PBXTargetDependency */,
+			);
+			name = TrigBlasterSKTests;
+			productName = TrigBlasterSKTests;
+			productReference = EAD8353D1964B3670049C135 /* TrigBlasterSKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EAD8350D1964B3670049C135 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = ZeroLinux5;
+				TargetAttributes = {
+					EAD8353C1964B3670049C135 = {
+						TestTargetID = EAD835141964B3670049C135;
+					};
+				};
+			};
+			buildConfigurationList = EAD835101964B3670049C135 /* Build configuration list for PBXProject "TrigBlasterSK" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EAD8350C1964B3670049C135;
+			productRefGroup = EAD835161964B3670049C135 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EAD835141964B3670049C135 /* TrigBlasterSK */,
+				EAD8353C1964B3670049C135 /* TrigBlasterSKTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EAD835131964B3670049C135 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAD835251964B3670049C135 /* InfoPlist.strings in Resources */,
+				EAD835381964B3670049C135 /* Images.xcassets in Resources */,
+				EAD835361964B3670049C135 /* Spaceship.png in Resources */,
+				EAD8352E1964B3670049C135 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EAD8353B1964B3670049C135 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAD835491964B3680049C135 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EAD835111964B3670049C135 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAD835341964B3670049C135 /* MyScene.m in Sources */,
+				EAD835311964B3670049C135 /* ViewController.m in Sources */,
+				EAD8352B1964B3670049C135 /* AppDelegate.m in Sources */,
+				EAD835271964B3670049C135 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EAD835391964B3670049C135 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAD8354B1964B3680049C135 /* TrigBlasterSKTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EAD835431964B3670049C135 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EAD835141964B3670049C135 /* TrigBlasterSK */;
+			targetProxy = EAD835421964B3670049C135 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EAD835231964B3670049C135 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EAD835241964B3670049C135 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		EAD8352C1964B3670049C135 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EAD8352D1964B3670049C135 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EAD835471964B3680049C135 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EAD835481964B3680049C135 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EAD8354C1964B3680049C135 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		EAD8354D1964B3680049C135 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EAD8354F1964B3680049C135 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TrigBlasterSK/TrigBlasterSK-Prefix.pch";
+				INFOPLIST_FILE = "TrigBlasterSK/TrigBlasterSK-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		EAD835501964B3680049C135 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TrigBlasterSK/TrigBlasterSK-Prefix.pch";
+				INFOPLIST_FILE = "TrigBlasterSK/TrigBlasterSK-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		EAD835521964B3680049C135 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TrigBlasterSK.app/TrigBlasterSK";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TrigBlasterSK/TrigBlasterSK-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "TrigBlasterSKTests/TrigBlasterSKTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		EAD835531964B3680049C135 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TrigBlasterSK.app/TrigBlasterSK";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TrigBlasterSK/TrigBlasterSK-Prefix.pch";
+				INFOPLIST_FILE = "TrigBlasterSKTests/TrigBlasterSKTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EAD835101964B3670049C135 /* Build configuration list for PBXProject "TrigBlasterSK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EAD8354C1964B3680049C135 /* Debug */,
+				EAD8354D1964B3680049C135 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EAD8354E1964B3680049C135 /* Build configuration list for PBXNativeTarget "TrigBlasterSK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EAD8354F1964B3680049C135 /* Debug */,
+				EAD835501964B3680049C135 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EAD835511964B3680049C135 /* Build configuration list for PBXNativeTarget "TrigBlasterSKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EAD835521964B3680049C135 /* Debug */,
+				EAD835531964B3680049C135 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EAD8350D1964B3670049C135 /* Project object */;
+}
