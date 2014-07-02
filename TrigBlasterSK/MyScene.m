@@ -31,6 +31,8 @@ const float Margin = 20.0f;
 
 const float PlayerMissileSpeed = 300.0f;
 
+const float CannonHitRadius = 25.0f;
+
 @implementation MyScene
 {
     CGSize _winSize;
@@ -69,6 +71,7 @@ const float PlayerMissileSpeed = 300.0f;
     CFTimeInterval _touchTime;
     
     SKAction *_missileShootSound;
+    SKAction *_missileHitSound;
 }
 
 -(id)initWithSize:(CGSize)size {
@@ -452,6 +455,26 @@ const float PlayerMissileSpeed = 300.0f;
     }
 }
 
+- (void)updatePlayerMissile:(NSTimeInterval)dt
+{
+    if (!_playerMissileSprite.hidden)
+    {
+        float deltaX = _playerMissileSprite.position.x - _turretSprite.position.x;
+        float deltaY = _playerMissileSprite.position.y - _turretSprite.position.y;
+        
+        float distance = sqrtf(deltaX*deltaX + deltaY*deltaY);
+        if (distance < CannonHitRadius)
+        {
+            [self runAction:_missileHitSound];
+            
+            _cannonHP = MAX(0, _cannonHP - 10);
+            
+            _playerMissileSprite.hidden = YES;
+            [_playerMissileSprite removeAllActions];
+        }
+    }
+}
+
 
 -(void)update:(NSTimeInterval)currentTime {
     /* Called before each frame is rendered */
@@ -467,6 +490,7 @@ const float PlayerMissileSpeed = 300.0f;
     
     [self updatePlayerAccelerationFromMotionManager];
     [self updatePlayer:_deltaTime];
+    [self updatePlayerMissile:_deltaTime];
     [self updateTurret:_deltaTime];
     [self checkCollisionOfPlayerWithCannon];
     [self drawHealthBar:_playerHealthBar withName:@"playerHealth" andHealthPoints:_playerHP];
