@@ -57,6 +57,8 @@ const float CannonCollisionSpeed = 200.0f;
     SKNode *_cannonHealthBar;
     
     SKAction *_collisionSound;
+    
+    float _playerSpin;
 }
 
 -(id)initWithSize:(CGSize)size {
@@ -259,6 +261,16 @@ const float CannonCollisionSpeed = 200.0f;
     _playerHealthBar.position = CGPointMake(
                                             _playerSprite.position.x - HealthBarWidth/2.0f + 0.5f,
                                             _playerSprite.position.y - _playerSprite.size.height/2.0f - 15.0f + 0.5f);
+    _playerSprite.zRotation += -SK_DEGREES_TO_RADIANS(_playerSpin);
+    
+    if (_playerSpin > 0.0f)
+    {
+        _playerSpin -= 2.0f * 360.0f * dt;
+        if (_playerSpin < 0.0f)
+        {
+            _playerSpin = 0.0f;
+        }
+    }
 }
 
 - (void)updateTurret:(NSTimeInterval)dt
@@ -340,6 +352,9 @@ const float CannonCollisionSpeed = 200.0f;
         
         _playerHP = MAX(0, _playerHP - 20);
         _cannonHP = MAX(0, _cannonHP - 5);
+        
+        _playerSpin = 180.0f * 3.0f;
+        
         [self runAction:_collisionSound];
     }
 }
