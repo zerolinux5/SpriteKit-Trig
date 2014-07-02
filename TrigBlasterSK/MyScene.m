@@ -9,6 +9,9 @@
 @import CoreMotion;
 #import "MyScene.h"
 
+#define SK_DEGREES_TO_RADIANS(__ANGLE__) ((__ANGLE__) * 0.01745329252f) // PI / 180
+#define SK_RADIANS_TO_DEGREES(__ANGLE__) ((__ANGLE__) * 57.29577951f) // PI * 180
+
 const float MaxPlayerAccel = 400.0f;
 const float MaxPlayerSpeed = 200.0f;
 
@@ -118,6 +121,8 @@ const float MaxPlayerSpeed = 200.0f;
     newY = MIN(_winSize.height, MAX(newY, 0));
     
     _playerSprite.position = CGPointMake(newX, newY);
+    float angle = atan2f(_playerSpeedY, _playerSpeedX);
+    _playerSprite.zRotation = angle - SK_DEGREES_TO_RADIANS(90);
 }
 
 
